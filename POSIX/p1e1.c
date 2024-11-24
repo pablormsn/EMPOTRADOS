@@ -12,11 +12,11 @@
 #include <errno.h> // Para usar errno
 #include <sched.h> // Para usar sched_fifo, sched_rr, sched_param
 #include <pthread.h> // Para usar pthread_create, pthread_join, pthread_exit
-#include <sys/mmam.h> // Para usar mmap, munmap. Da error porque solo funciona en sistemas operativos de tiempo real
+#include <sys/mman.h> // Para usar mmap, munmap. Da error porque solo funciona en sistemas operativos de tiempo real
 
 #define PRIORIDAD_A 24 // Prioridad de la tarea A. Debe ser mayor que la prioridad de la tarea B
 #define ITER_A 40 // Número de iteraciones de la tarea A
-#define INC_A 1 // Incremento de la tarea A
+#define INC_A 100 // Incremento de la tarea A
 
 #define PRIORIDAD_B 26 // Prioridad de la tarea B. Debe ser menor que la prioridad de la tarea A
 #define ITER_B 40 // Número de iteraciones de la tarea B
@@ -66,7 +66,7 @@ void *tarea_a(void *arg){ //
     int i; // Contador. Es un entero.
     int policy; // Política de planificación. Es un entero.
     //CHKE(pthread_getschedparam(pthread_self(), &policy, &param)); // Obtener la política de planificación y los parámetros de la tarea
-    pthread_get_getschedparam(pthread_self(), &policy, &param); // Obtener la política de planificación y los parámetros de la tarea
+    pthread_getschedparam(pthread_self(), &policy, &param); // Obtener la política de planificación y los parámetros de la tarea
     pol = (policy == SCHED_FIFO) ? "FF": (policy == SCHED_RR) ? "RR": "--"; // Asignar la política de planificación
 
     for(i=0; i<ITER_A; i++){ //Para i desde 0 hasta ITER_A (40)
@@ -182,6 +182,8 @@ int main(int argc, const char *argv[]){
     pthread_attr_destroy(&attr); //Destruir los atributos de la tarea
 
     printf("Tarea principal [%s:%d]\n", pol, prio0); //Imprimir la prioridad y el contador
+    printf("Tarea A configurada con prioridad %d\n", prio1);
+    printf("Tarea B configurada con prioridad %d\n", prio2);
 
     //CHKE(pthread_join(t1, NULL)); //Esperar a que la tarea A termine
     pthread_join(t1, NULL); //Esperar a que la tarea A termine
