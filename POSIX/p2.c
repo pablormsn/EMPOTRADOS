@@ -48,18 +48,18 @@ struct Data_Tmp{
     pthread_mutex_t mutex;
     int estado;
     int val;
-}
+};
 
 struct Data_Prs{
     pthread_mutex_t mutex;
     int estado;
     int val;
-}
+};
 
 struct Data_Mtr{
     struct Data_Tmp tmp;
     struct Data_Prs prs;
-}
+};
 
 /*----------------------------*/
 /*
