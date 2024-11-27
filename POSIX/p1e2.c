@@ -98,7 +98,7 @@ void *tarea_a(void *arg){
     int policy; //Política de planificación
     //CHKE(pthread_getschedparam(pthread_self(), &policy, &param)); //Obtener la política de planificación y los parámetros
     pthread_getschedparam(pthread_self(), &policy, &param); //Obtener la política de planificación y los parámetros
-    pol = (policy == SCHED_FIFO) ? "FF" : (policy == SCHED_RR) ? "RR" : "--" //Obtener la política de planificación
+    pol = (policy == SCHED_FIFO) ? "FF" : (policy == SCHED_RR) ? "RR" : "--"; //Obtener la política de planificación
 
     //CHKN(clock_gettime(CLOCK_MONOTONIC, &next)); //Obtener el tiempo actual
     clock_gettime(CLOCK_MONOTONIC, &next); //Obtener el tiempo actual
@@ -128,7 +128,7 @@ void *tarea_b(void *arg){
     int policy; //Política de planificación
     //CHKE(pthread_getschedparam(pthread_self(), &policy, &param)); //Obtener la política de planificación y los parámetros
     pthread_getschedparam(pthread_self(), &policy, &param); //Obtener la política de planificación y los parámetros
-    pol = (policy == SCHED_FIFO) ? "FF" : (policy == SCHED_RR) ? "RR" : "--" //Obtener la política de planificación
+    pol = (policy == SCHED_FIFO) ? "FF" : (policy == SCHED_RR) ? "RR" : "--"; //Obtener la política de planificación
 
     //CHKN(clock_gettime(CLOCK_MONOTONIC, &next)); //Obtener el tiempo actual
     clock_gettime(CLOCK_MONOTONIC, &next); //Obtener el tiempo actual
@@ -185,6 +185,7 @@ int main(int argc, const char *argv[]){
     struct sched_param param; //Parámetros de planificación
     const char *pol; //Política de planificación
     int pcy, policy = SCHED_FIFO; //Política de planificación. pcy es una variable auxiliar
+    int prio0 = 1, prio1 = 1, prio2 = 1; //Prioridades de las tareas
     pthread_t t1, t2; //Hilos
     /*
     * La tarea principal debe tener la mayor prioridad, para poder
@@ -219,3 +220,4 @@ int main(int argc, const char *argv[]){
     pthread_join(t2, NULL); //Esperar a la tarea B
     pthread_mutex_destroy(&shared_data.mutex); //Destruir el mutex
     return 0; //Retornar 0
+}
