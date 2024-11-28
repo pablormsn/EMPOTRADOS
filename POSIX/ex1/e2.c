@@ -43,14 +43,11 @@ void espera_activa(time_t seg){
     while (time(0)<t) { /*Esperar activamente*/}
 }
 
-// void addtime(struct timespec* tm, const struct timespec* val)
-// {
-// 	tm->tv_sec += val->tv_sec;
-// 	tm->tv_nsec += val->tv_nsec;
-// 	if (tm->tv_nsec >= 1000000000L) {
-// 		tm->tv_sec += (tm->tv_nsec / 1000000000L);
-// 		tm->tv_nsec = (tm->tv_nsec % 1000000000L);
-// 	}
+// const char *get_time(char *buf){
+//     time_t t = time(0); //Obtener el tiempo actual
+//     char *f = ctime_r(&t, buf); //Esta función convierte el tiempo en una cadena y la almacena en buf /* buf de longitud minima 26 */
+//     f[strlen(f)-1] = '\0'; //Eliminar el salto de línea
+//     return f; //Retornar la cadena
 // }
 
 void addtime (struct timespec *tm, const struct timespec *val){
