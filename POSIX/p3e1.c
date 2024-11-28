@@ -203,7 +203,7 @@ int main(int argc, const char *argv[]){
     sigaddset(&sigset, SIGUSR2); //Añadir la señal SIGUSR2 al conjunto
     pthread_sigmask(SIG_BLOCK, &sigset, NULL); //Bloquear las señales
 
-    shared.data.cnt = 0; //Inicializar el contador
+    shared_data.cnt = 0; //Inicializar el contador
     pthread_mutex_init(&shared_data.mutex, NULL); //Inicializar el mutex
 
     pthread_attr_init(&attr); //Inicializar los atributos de la tarea
