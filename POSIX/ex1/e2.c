@@ -35,7 +35,7 @@ struct Data{
     float valtemp;
     int aire;
     float gasto;
-}
+};
 
 /*----------Soporte*/
 void espera_activa(time_t seg){
@@ -138,7 +138,7 @@ void *tareaMTR (void *arg){
         pthread_mutex_lock(&data->mutex);
 
         printf("Parametro energetico: %f\n", data->valtemp);
-        printf("Estado del aire acondicionado: %d\n", data->aire==0 ? "Modo Frio" : "Modo Calefaccion");
+        printf("Estado del aire acondicionado: %s\n", data->aire==0 ? "Modo Frio" : "Modo Calefaccion");
         printf("Gasto de la ultima accion: %f\n", data->gasto);
 
         pthread_mutex_unlock(&data->mutex);
@@ -187,7 +187,7 @@ int main(int argc, const char *argv[]){
     srand(time(NULL));
     shared_data.gasto = 0.0;
     shared_data.valtemp = 0.0;
-    pthread_mutex_init(&shared_data.mutex);
+    pthread_mutex_init(&shared_data.mutex, NULL);
 
     pthread_attr_init(&attr);
     pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
